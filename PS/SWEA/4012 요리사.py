@@ -1,19 +1,22 @@
 
-answer = 1e9
-
-def dfs(cnt, k):
+def f(n, idx):
     global answer
-    if cnt == N//2:
-        a, b = [], []
-        for i in range(N):
 
 
-    return
+
+    for i in range(idx+1, N):
+        if visit[i]:
+            continue
+        visit[i] = 1
+        f(n, i)
+
+
 
 T = int(input())
 for t in range(T):
     N = int(input())
-    lst = [list(map(int, input().split())) for _ in range(N)]
-    visit = [0]*(N+1)
-    dfs(0,0)
+    info = [list(map(int, input().split())) for _ in range(N)]
+    visit = [0]*N
+    answer = 1e9
+
 
