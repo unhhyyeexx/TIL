@@ -22,6 +22,5 @@ for t in range(T):
     N = int(input())
     maps = [list(map(int, input().split())) for _ in range(N)]
     answer = 1e9
-    visit = [[0]*N for _ in range(N)]
     solution(0, 0, maps[0][0])
     print(f'#{t+1} {answer}')
