@@ -28,3 +28,4 @@ for t in range(T):
     dijkstara(0)
     result = distance[-1]
     print(f'#{t+1} {result}')
+
