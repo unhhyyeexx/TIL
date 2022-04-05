@@ -1,23 +1,31 @@
 
-def solution(now, sumvalue):
-    global answer
-    if answer <= sumvalue:
-        return
-    if now == N:
-        answer = min(answer, sumvalue)
-        return
-    for n in range(N):
-        if not visit[n]:
-            visit[n] = 1
-            new_sumvalue = sumvalue + maps[now][n]
-            solution(now +1, new_sumvalue)
-            visit[n] = 0
+from collections import deque
+INF = int(1e9)
+
+dir = [[0,1],[0,-1],[1,0],[-1,0]]
+def solution(x, y):
+    q = deque()
+    q.append((x, y))
+    distance[y][x] = 0
+    while q:
+        x, y = q.popleft()
+        for d in dir:
+            nx, ny = x+d[0], y+d[1]
+            if nx<0 or ny<0 or nx>=N or ny>=N:
+                continue
+            cost = 1
+            if height[ny][nx] > height[y][x]:
+                cost += height[ny][nx] - height[y][x]
+            if distance[ny][nx] > distance[y][x] + cost:
+                q.append((nx, ny))
+                distance[ny][nx] = distance[y][x] + cost
+
 
 T = int(input())
 for t in range(T):
     N = int(input())
-    maps = [list(map(int, input().split())) for _ in range(N)]
-    visit = [0] * N
-    answer = 1e9
+    height = [list(map(int, input().split())) for _ in range(N)]
+    distance = [[INF]*N for _ in range(N)]
     solution(0,0)
-    print(f'#{t+1} {answer}')
+    result = distance[N-1][N-1]
+    print(f'#{t+1} {result}')
